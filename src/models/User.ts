@@ -1,15 +1,23 @@
-interface UserProps{
+interface UserProps {
     name?: string;
     age?: number;
 }
-export class User{
+
+type Callback = () => {}
+
+export class User {
+
+    events: { [key: string]: Callback[] } = {}
+ 
     constructor(private data: UserProps) { }
 
     get(propName: string): (number | string) {
-        return this.data[propName] 
+        return this.data[propName]
     }
 
-    set(update: UserProps): void{
+    set(update: UserProps): void {
         Object.assign(this.data, update)
     }
+
+    on(eventName: string, callback: Callback) { }
 }
