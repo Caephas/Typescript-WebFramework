@@ -1,5 +1,5 @@
 export class UserForm {
-  constructor(public parent: Element) {}
+  constructor(public parent: Element) { }
 
   template(): string {
     return `
