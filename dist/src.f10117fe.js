@@ -4842,6 +4842,13 @@ function (_super) {
     });
   };
 
+  User.prototype.setName = function () {
+    var name = '';
+    this.set({
+      name: name
+    });
+  };
+
   return User;
 }(Model_1.Model);
 
@@ -4867,6 +4874,16 @@ function () {
       _this.model.setRandomAge();
     };
 
+    this.onSetNameClick = function () {
+      var input = _this.parent.querySelector('input');
+
+      var name = input === null || input === void 0 ? void 0 : input.value;
+
+      _this.model.set({
+        name: name
+      });
+    };
+
     this.bindModel();
   }
 
@@ -4880,12 +4897,13 @@ function () {
 
   UserForm.prototype.eventsMap = function () {
     return {
-      'click:.set-age': this.onSetAgeClick
+      'click:.set-age': this.onSetAgeClick,
+      'click:.set-name': this.onSetNameClick
     };
   };
 
   UserForm.prototype.template = function () {
-    return "\n      <div>\n        <h1>User Form</h1>\n        \n        <div>User name : ".concat(this.model.get('name'), "</div>\n        <div>User age : ").concat(this.model.get('age'), "</div>\n        \n        <input />\n        <button>Click Me</button>\n        <button class=\"set-age\">Set Random age</button\n      </div>\n    ");
+    return "\n      <div>\n        <h1>User Form</h1>\n        \n        <div>User name : ".concat(this.model.get('name'), "</div>\n        <div>User age : ").concat(this.model.get('age'), "</div>\n        \n        <input />\n        <button class=\"set-name\">Change Name</button>\n        <button class=\"set-age\">Set Random age</button\n      </div>\n    ");
   };
 
   UserForm.prototype.bindEvents = function (fragment) {
@@ -4933,8 +4951,14 @@ var user = User_1.User.buildUser({
   name: 'John',
   age: 23
 });
-var userForm = new UserForm_1.UserForm(document.getElementById('root'), user);
-userForm.render();
+var root = document.getElementById('root');
+
+if (root) {
+  var userForm = new UserForm_1.UserForm(root, user);
+  userForm.render();
+} else {
+  throw new Error('Root element not found');
+}
 },{"./models/User":"src/models/User.ts","./views/UserForm":"src/views/UserForm.ts"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -4963,7 +4987,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60099" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57317" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
